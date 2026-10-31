@@ -1,0 +1,143 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8081,
+    "read_timeout": 30,
+    "tls": {
+      "cert": "",
+      "key": "",
+      "_note": "填了 cert/key 才启用 HTTPS；客户端必须用 http:// 或 https:// 与之对应"
+    },
+    "force_nonstream": false,
+    "force_nonstream_ua": []
+  },
+  "auth": {
+    "api_key": "sk-mimo",
+    "require_for_models": false,
+    "require_for_health": false
+  },
+  "admin": {
+    "user": "admin",
+    "pass": "admin",
+    "accounts": [],
+    "session_ttl": 43200
+  },
+  "accounts": {
+    "file": "accounts.json",
+    "auto_refresh": true,
+    "list": [],
+    "ph": "",
+    "token": "",
+    "uid": ""
+  },
+  "mimo": {
+    "base": "https://aistudio.xiaomimimo.com",
+    "model_map": {
+      "mimo-v2.5-pro": "mimo-v2.6-pro",
+      "mimo-v2.5": "mimo-v2.6-flash",
+      "mimo-v2.6-pro": "mimo-v2.6-pro",
+      "mimo-v2.6-flash": "mimo-v2.6-flash",
+      "mimo-v2.6-pro-ultraspeed-studio": "mimo-v2.6-pro-ultraspeed-studio",
+      "mimo-v2.6-ultraspeed": "mimo-v2.6-pro-ultraspeed-studio",
+      "mimo-v2.6-flash-studio": "mimo-v2.6-flash",
+      "mimo-v2.6-pro-studio": "mimo-v2.6-pro",
+      "mimo-v2-flash": "mimo-v2.6-flash",
+      "mimo-v2-pro": "mimo-v2.6-pro",
+      "mimo-v2-omni": "mimo-v2.6-pro",
+      "mimo-v2.1-pro": "mimo-v2.6-pro",
+      "mimo-v2.1-omni": "mimo-v2.6-pro",
+      "mimo-v2.6": "mimo-v2.6-pro",
+      "MiMo-V2.6-Flash": "mimo-v2.6-flash",
+      "MiMo-V2.6-Pro": "mimo-v2.6-pro",
+      "MiMo-V2.6-Pro-UltraSpeed": "mimo-v2.6-pro-ultraspeed-studio"
+    },
+    "timeout": 120,
+    "stream_idle_timeout": 300,
+    "heartbeat_interval": 15,
+    "history_mode": "full",
+    "conversation_ttl": 1800,
+    "_note": "default_model=客户端传来未知模型名时回退到此模型; on_unknown_model=fallback(回退,推荐)|passthrough(原样发给上游)|error(直接报错并列出可用模型). stream_idle_timeout=上游多久无数据就放弃(秒); heartbeat_interval=流式心跳间隔(秒,0=关闭); history_mode=full拼全量历史(最稳)|last只发最后一条|auto按有无会话自动选; conversation_ttl=会话复用有效期(秒)",
+    "web_search": false,
+    "model_ids": [
+      "mimo-v2.6-pro",
+      "mimo-v2.6-flash",
+      "mimo-v2.6-pro-ultraspeed-studio",
+      "mimo-v2.5-tts",
+      "mimo-v2.5-tts-voiceclone",
+      "mimo-v2.5-tts-voicedesign",
+      "mimo-v2.5-asr"
+    ],
+    "_model_note": "model_ids 来自 /open-apis/bot/config 的 modelConfigList(HAR 2026-10-24 实证共15个); model_map 是别名->真实模型码",
+    "max_tools": 32,
+    "max_tool_desc": 160,
+    "empty_content_fallback": true,
+    "_tool_note": "max_tools=注入提示词的工具数量上限(MCP工具多时防prompt爆炸); max_tool_desc=单个工具描述截断长度; empty_content_fallback=正文为空时用思考内容兜底",
+    "default_model": "mimo-v2.6-pro",
+    "on_unknown_model": "fallback"
+  },
+  "tts": {
+    "voice": "冰糖",
+    "scene": "BRIEF_DESCRIPTION",
+    "format": "wav",
+    "voice_map": {
+      "alloy": "冰糖",
+      "echo": "冰糖",
+      "fable": "冰糖",
+      "onyx": "冰糖",
+      "nova": "冰糖",
+      "shimmer": "冰糖"
+    },
+    "conversation_ttl": 1800,
+    "model": "mimo-v2.5-tts",
+    "max_wait": 120,
+    "poll_interval": 0.6,
+    "voices": [
+      "冰糖",
+      "Mia",
+      "茉莉",
+      "Chloe",
+      "苏打",
+      "Milo",
+      "白桦",
+      "Dean"
+    ],
+    "_note": "model 可选: mimo-v2.5-tts(标准) / mimo-v2.5-tts-voiceclone(音色克隆) / mimo-v2.5-tts-voicedesign(音色设计)",
+    "response_format": "wav",
+    "ffmpeg": "",
+    "stream_max_chars": 180,
+    "stream_prefetch": 2
+  },
+  "asr": {
+    "model": "mimo-v2.5-asr",
+    "language": "auto",
+    "max_bytes": 10485760,
+    "max_wait": 90,
+    "poll_interval": 0.6,
+    "_note": "language=auto 自动检测，可填 zh / en 等；max_bytes 音频大小上限；max_wait 轮询总时长(秒)；poll_interval 首次轮询间隔(秒，之后指数退避至2s)"
+  },
+  "misc": {
+    "max_logs": 200,
+    "log_requests": true,
+    "debug": false,
+    "debug_file": "",
+    "debug_max_body": 8000,
+    "_note": "debug=true 时日志输出每个上游请求的完整 URL/头/体与响应（敏感信息自动打码）；也可用 POST /api/admin/debug 运行时开关"
+  },
+  "claw": {
+    "host_files_prefix": "/open-apis/user/mimo-claw/host-files",
+    "auto_create_on_start": false,
+    "create_wait_timeout": 90,
+    "release_path": "/open-apis/user/mimo-claw/release",
+    "ensure_cache_ttl": 120,
+    "expose_tools": false,
+    "auto_execute": false,
+    "auto_execute_rounds": 3,
+    "auto_schedule": false,
+    "schedule_interval_hours": 3,
+    "schedule_on_start": false,
+    "daily_limit_per_account": 1,
+    "schedule_account_gap": 3,
+    "state_file": "claw_state.json",
+    "only_one_container": true
+  }
+}
